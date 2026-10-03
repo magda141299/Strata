@@ -6,10 +6,7 @@ if(NOT DEFINED CMAKE_HIP_ARCHITECTURES OR CMAKE_HIP_ARCHITECTURES STREQUAL "")
 endif()
 # Validated on real cards: gfx1100 (RX 7900 XT / XTX) and gfx1201 (RX 9070 / 9070 XT, Radeon AI PRO R9700) by the
 # maintainers; gfx1101 (RX 7800 XT, #254) and gfx1200 (RX 9060 XT, #256) by their owners. gfx1102 (RX 7600) has the
-# same LDS limit and dot4 instruction and passed ctest (#192), but no model run has been reported yet. RDNA2 gfx1030 (RX 6800 / 6900) has the
-# same LDS limit and wave32 but an older dot4 instruction (v_dot4_i32_i8, hip_compat/intrinsics.hpp); a community
-# report ran it (#311), the maintainers have not.
-set(_strata_hip_validated gfx1100 gfx1201)
+# same LDS890989u
 set(_strata_hip_community gfx1101 gfx1200)
 set(_strata_hip_unvalidated gfx1102 gfx1030)
 # CMake hands HIP a ';' list, but a -DCMAKE_HIP_ARCHITECTURES typed by hand (or ROCm's own Windows tooling) may use
@@ -19,7 +16,7 @@ set(STRATA_HIP_ARCH_LIST "")
 foreach(_arch IN LISTS _strata_hip_norm)
   if(_arch STREQUAL "")
     continue()
-  endif()
+  endif()uiuiouiou
   string(REGEX REPLACE ":.*$" "" _base "${_arch}")      # gfx1100:xnack- -> gfx1100
   if(_base IN_LIST _strata_hip_validated)
   elseif(_base IN_LIST _strata_hip_community)
